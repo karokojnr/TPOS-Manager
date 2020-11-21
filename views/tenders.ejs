@@ -1,0 +1,118 @@
+<%- include('./includes/header.ejs') %>
+<!-- Dashboard Container -->
+<div class="dashboard-container">
+    <%- include('./includes/side-bar.ejs') %>
+    <!-- Dashboard Content
+    ================================================== -->
+    <div class="dashboard-content-container" data-simplebar>
+        <div class="dashboard-content-inner">
+
+            <!-- Dashboard Headline -->
+            <div class="dashboard-headline">
+                <h3>Manage Tenders</h3>
+                <!-- Breadcrumbs -->
+                <nav id="breadcrumbs" class="dark">
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Dashboard</a></li>
+                        <li>Manage Tenders</li>
+                    </ul>
+                </nav>
+            </div>
+
+            <!-- Row -->
+            <div class="row">
+
+                <!-- Dashboard Box -->
+                <div class="col-xl-12">
+                    <div class="dashboard-box margin-top-0">
+                        <div><%- include ("./partials/messages") %></div>
+
+
+                        <!-- Headline -->
+                        <div class="headline">
+                            <h3><i class="icon-material-outline-watch"></i> <%= tendersLength %>
+                                Tenders
+                            </h3>
+                        </div>
+
+                        <div class="content">
+                            <ul class="dashboard-box-list">
+                                <% if (tenders.length > 0) { %>
+                                <% for (let tender of tenders) { %>
+
+                                <li>
+                                    <!-- Overview -->
+                                    <div class="freelancer-overview manage-candidates">
+                                        <div class="freelancer-overview-inner">
+
+                                            <!-- Avatar
+                                            <div class="freelancer-avatar">
+                                                <div class="verified-badge"></div>
+                                                <a href="#"><img src="/images/user.png" alt=""></a>
+                                            </div> -->
+
+                                            <!-- Name -->
+                                            <div class="freelancer-name">
+                                                <h4><a href="#"><%= tender.title %>
+                                                        <img class="flag" src="/images/flags/ke.svg" alt=""
+                                                            title="Kenya" data-tippy-placement="top"> - <span
+                                                            class="freelancer-detail-item">
+                                                            <%= tender.tenderNumber %></span></a>
+                                                </h4>
+                                                <div></div>
+
+
+                                                <%
+                                                var monthNames = [
+                                                "January", "February", "March",
+                                                "April", "May", "June", "July",
+                                                "August", "September", "October",
+                                                "November", "December"
+                                                ];
+                                                var d = tender.closingTime.getDate();
+                                                var m = monthNames[tender.closingTime.getMonth()];
+                                                var y = tender.closingTime.getFullYear();
+                                                %>
+
+                                                <!-- Details -->
+                                                <span class="freelancer-detail-item"><a href="#"><i
+                                                            class="icon-material-outline-access-time"></i><%= d+ ` ` +m+ ` ` +y %></a></span>
+
+                                                <span class="freelancer-detail-item"><i
+                                                        class="icon-material-outline-bookmark-border"></i>
+                                                    <%= tender.description %></span>
+
+
+                                                <!-- Buttons -->
+                                                <div
+                                                    class="buttons-to-right always-visible margin-top-25 margin-bottom-5">
+                                                    <a href="/get-edit-tender/<%= tender._id %>?edit=true"
+                                                        class="button ripple-effect"><i
+                                                            class="icon-line-awesome-pencil"></i> Update</a>
+                                                    <form action="/delete-tender/<%= tender._id %>?_method=DELETE"
+                                                        method="post">
+                                                        <button type="submit" class="button ripple-effect">
+                                                            <i class="icon-feather-trash"></i> Delete
+                                                        </button>
+                                                    </form>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <% } %>
+                                <% } else { %>
+                                <h1>No Tenders Found!</h1>
+                                <% } %>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- Row / End -->
+
+            <%- include('./includes/footer.ejs') %>

@@ -1,0 +1,70 @@
+<%- include('./includes/login-header.ejs') %>
+
+<!-- Titlebar
+================================================== -->
+<div id="titlebar" class="gradient">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 freelancer-name">
+
+                <h2>TPOS STORE <img class="flag" src="images/flags/ke.svg" alt="" title="Kenya"
+                        data-tippy-placement="top">
+                </h2>
+
+                <!-- Breadcrumbs -->
+                <nav id="breadcrumbs" class="dark">
+                    <ul>
+                        <li>Manager</li>
+                        <li>Log In</li>
+                    </ul>
+                </nav>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Page Content
+================================================== -->
+<div class="container">
+    <div class="row">
+        <div class="col-xl-5 offset-xl-3">
+
+
+            <div class="login-register-page">
+                <!-- Welcome Text -->
+                <div class="welcome-text">
+                    <h3>We're glad to see you again!</h3>
+                    <span>Don't have an account? <a href="/get-register">Sign Up!</a></span>
+                </div>
+                <%- include ("./partials/messages") %>
+                <!-- Form -->
+                <form action="/login" method="POST">
+                    <div class="input-with-icon-left">
+                        <i class="icon-material-baseline-mail-outline"></i>
+                        <input type="text" class="input-text with-border" name="email" id="email" placeholder="Email"
+                            required />
+                    </div>
+
+                    <div class="input-with-icon-left">
+                        <i class="icon-material-outline-lock"></i>
+                        <input type="password" class="input-text with-border" name="password" id="password"
+                            placeholder="Password" required />
+                    </div>
+                    <!-- Button -->
+                    <button type="submit" class="button full-width button-sliding-icon ripple-effect margin-top-10">Log
+                        In <i class="icon-material-outline-arrow-right-alt"></i></button>
+                </form>
+
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- Spacer -->
+<div class="margin-top-70"></div>
+<!-- Spacer / End-->

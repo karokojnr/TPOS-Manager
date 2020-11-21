@@ -1,0 +1,100 @@
+<%- include('./includes/header.ejs') %>
+<!-- Dashboard Container -->
+<div class="dashboard-container">
+    <%- include('./includes/side-bar.ejs') %>
+    <!-- Dashboard Content
+    ================================================== -->
+    <div class="dashboard-content-container" data-simplebar>
+        <div class="dashboard-content-inner">
+
+            <!-- Dashboard Headline -->
+            <div class="dashboard-headline">
+                <h3><% if (editing) { %>Edit
+                    Tender<% } else { %>Post a Tender<% } %></h3>
+
+                <!-- Breadcrumbs -->
+                <nav id="breadcrumbs" class="dark">
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Dashboard</a></li>
+                        <li><% if (editing) { %>Update
+                            Tender<% } else { %>Add Tender<% } %></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <!-- Row -->
+            <div class="row">
+
+                <!-- Dashboard Box -->
+                <div class="col-xl-12">
+                    <div class="dashboard-box margin-top-0">
+
+                        <!-- Headline -->
+                        <div class="headline">
+                            <h3><i class="icon-material-outline-watch"></i> Tender Submission Form</h3>
+                        </div>
+                        <%- include ("./partials/messages") %>
+                        <form action="/<% if (editing) { %>post-edit-tender<% } else { %>post-add-tender<% } %>"
+                            method="POST">
+
+                            <div class="content with-padding padding-bottom-10">
+                                <div class="row">
+                                    <div class="col-xl-4">
+                                        <div class="submit-field">
+                                            <h5>Tender Number</h5>
+                                            <input type="title" class="with-border" name="tenderNumber"
+                                                id="tenderNumber"
+                                                value="<% if (editing) { %><%= tender.tenderNumber %><% } %>">
+
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-4">
+                                        <div class="submit-field">
+                                            <h5>Title</h5>
+                                            <input type="title" class="with-border" name="title" id="title"
+                                                value="<% if (editing) { %><%= tender.title %><% } %>">
+
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xl-4">
+                                        <div class="submit-field">
+                                            <h5>Closing Time</h5>
+                                            <input type="date" class="with-border" name="closingTime" id="closingTime"
+                                                value="<% if (editing) { %><%= tender.closingTime %><% } %>">
+                                        </div>
+                                    </div>
+
+                                    
+                                    
+                                    <div class="col-xl-12">
+                                        <div class="submit-field">
+                                            <h5>Description</h5>
+                                            <textarea class="form-control" id="description" name="description" rows="10"
+                                                value="<% if (editing) { %><%= tender.description %><% } %>"></textarea>
+
+                                        </div>
+                                    </div>
+                                    
+
+
+                                </div>
+                            </div>
+                            <% if (editing) { %>
+                            <input type="hidden" value="<%= tender._id %>" name="tenderId">
+                            <% } %>
+                            <div class="col-xl-12">
+                                <button type="submit" class="button ripple-effect big margin-top-30"><i
+                                        class="<% if (editing) { %>icon-feather-edit<% } else { %>icon-feather-plus<% } %>"></i>
+                                    <% if (editing) { %>Update
+                                    Tender<% } else { %>Add Tender<% } %></button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+
+            </div>
+            <!-- Row / End -->
+            <%- include('./includes/footer.ejs') %>

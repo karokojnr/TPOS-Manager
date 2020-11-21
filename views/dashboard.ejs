@@ -1,0 +1,67 @@
+<%- include('./includes/header.ejs') %>
+<!-- Dashboard Container -->
+<div class="dashboard-container">
+    <%- include('./includes/side-bar.ejs') %>
+    <!-- Dashboard Content
+	================================================== -->
+    <div class="dashboard-content-container" data-simplebar>
+        <div class="dashboard-content-inner">
+
+            <!-- Dashboard Headline -->
+            <div class="dashboard-headline">
+                <h3>Welcome, <%= name %></h3>
+                <span>We are glad to see you again!</span>
+
+                <!-- Breadcrumbs -->
+                <nav id="breadcrumbs" class="dark">
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li>Dashboard</li>
+                    </ul>
+                </nav>
+            </div>
+
+            <!-- Fun Facts Container -->
+            <div class="fun-facts-container">
+                <div class="fun-fact" data-fun-fact-color="#36bd78">
+                    <div class="fun-fact-text">
+                        <span>Tender</span>
+                        <h4>
+                            <%= tendersNumber %>
+                        </h4>
+                    </div>
+                    <div class="fun-fact-icon"><i class="icon-material-outline-watch"></i></div>
+                </div>
+
+                <!-- Last one has to be hidden below 1600px, sorry :( -->
+                <div class="fun-fact" data-fun-fact-color="#2a41e6">
+                    <div class="fun-fact-text">
+                        <span>n/a</span>
+                        <h4>0</h4>
+                    </div>
+                    <div class="fun-fact-icon"><i class="icon-feather-trending-up"></i></div>
+                </div>
+            </div>
+
+            <!-- Row -->
+            <div class="row">
+
+                <div class="col-xl-8">
+                    <!-- Dashboard Box -->
+                    <div class="dashboard-box main-box-in-row">
+                        <div class="headline">
+                            <h3><i class="icon-feather-bar-chart-2"></i>TPOS DATA</h3>
+                        </div>
+                        <div class="content">
+                            <!-- Chart -->
+                            <div class="chart">
+                                <canvas id="chart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Dashboard Box / End -->
+                </div>
+
+            </div>
+            <!-- Row / End -->
+            <%- include('./includes/footer.ejs') %>

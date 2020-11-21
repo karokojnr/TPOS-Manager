@@ -1,0 +1,80 @@
+<%- include('./includes/login-header.ejs') %>
+
+<!-- Titlebar
+================================================== -->
+<div id="titlebar" class="gradient">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 freelancer-name">
+
+                <h2>TPOS <img class="flag" src="images/flags/ke.svg" alt="" title="Kenya" data-tippy-placement="top">
+                </h2>
+
+                <!-- Breadcrumbs -->
+                <nav id="breadcrumbs" class="dark">
+                    <ul>
+                        <li>Manager</li>
+                        <li>Sign Up</li>
+                    </ul>
+                </nav>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Page Content
+================================================== -->
+<div class="container">
+    <div class="row">
+        <div class="col-xl-5 offset-xl-3">
+
+
+            <div class="login-register-page">
+                <!-- Welcome Text -->
+                <div class="welcome-text">
+                    <h3 style="font-size: 26px;">Let's create your account!</h3>
+                    <span>Already have an account? <a href="/get-login">Log In!</a></span>
+                </div>
+                <%- include ("./partials/messages") %>
+                <!-- Form -->
+                <form action="/register" method="POST">
+                    <div class="input-with-icon-left">
+                        <i class="icon-feather-user"></i>
+                        <input type="text" class="input-text with-border" name="username" id="username"
+                            placeholder="Username" required />
+                    </div>
+                    <div class="input-with-icon-left">
+                        <i class="icon-material-baseline-mail-outline"></i>
+                        <input type="text" class="input-text with-border" name="email" id="email" placeholder="Email"
+                            required />
+                    </div>
+
+                    <div class="input-with-icon-left">
+                        <i class="icon-material-outline-lock"></i>
+                        <input type="password" class="input-text with-border" name="password" id="password"
+                            placeholder="Password" required />
+                    </div>
+                    <div class="input-with-icon-left">
+                        <i class="icon-material-outline-lock"></i>
+                        <input type="password" class="input-text with-border" name="password2" id="password2"
+                            placeholder="Confirm Password" required />
+                    </div>
+                    <!-- Button -->
+                    <button type="submit"
+                        class="button full-width button-sliding-icon ripple-effect margin-top-10">Register <i
+                            class="icon-material-outline-arrow-right-alt"></i></button>
+                </form>
+
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- Spacer -->
+<div class="margin-top-70"></div>
+<!-- Spacer / End-->
