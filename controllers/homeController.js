@@ -1,15 +1,25 @@
-const Certificate = require("../models/Certificate")
 const Tender = require("../models/Tender")
+const Bid = require("../models/Bid")
+
 
 exports.getHome = async (req, res) => {
-    const allCertificates = await Certificate.find();
-    const allTenders = await Tender.find();
+    const allTenders = await Tender.find({ managerId: req.user._id });
+    const allBids = await Bid.find();
+    const approvedBids = await Bid.find({ status: "PASS" })
+    const denieddBids = await Bid.find({ status: "FAIL" })
+    const pendingdBids = await Bid.find({ status: "PENDING" })
     const tendersLength = allTenders.length;
-    const certificatesLength = allCertificates.length;
+    const bidsLength = allBids.length;
+    const approvedBidsLength = approvedBids.length
+    const deniedBidsLength = denieddBids.length
+    const pendingdBidsLength = pendingdBids.length
     res.render("dashboard", {
         // //user accessed after login
         name: req.user.username,
-        certificatesNumber: certificatesLength,
-        tendersNumber: tendersLength
+        tendersNumber: tendersLength,
+        bidsNumber: bidsLength,
+        approvedBidsNumber: approvedBidsLength,
+        deniedBidsNumber: deniedBidsLength,
+        pendingdBidsNumber: pendingdBidsLength
     });
 }

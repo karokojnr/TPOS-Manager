@@ -1,16 +1,32 @@
 const Tender = require("../models/Tender")
+const Bid = require("../models/Bid")
 
 exports.getAddTender = async (req, res) => {
 
-    const tenders = await Tender.find();
+    const tenders = await Tender.find({ managerId: req.user._id });
+    const allBids = await Bid.find();
+    const approvedBids = await Bid.find({ status: "PASS" })
+    const denieddBids = await Bid.find({ status: "FAIL" })
+    const pendingdBids = await Bid.find({ status: "PENDING" })
     const tendersLength = tenders.length;
+    const bidsLength = allBids.length;
+    const approvedBidsLength = approvedBids.length
+    const deniedBidsLength = denieddBids.length
+    const pendingdBidsLength = pendingdBids.length
     res.render("add-tender", {
         editing: false,
         name: req.user.username,
         tendersNumber: tendersLength,
+        bidsNumber: bidsLength,
+        approvedBidsNumber: approvedBidsLength,
+        deniedBidsNumber: deniedBidsLength,
+        pendingdBidsNumber: pendingdBidsLength
+
     });
 }
 exports.postAddTender = (req, res) => {
+    const name = req.user.username;
+    const managerId = req.user._id;
 
     const { tenderNumber, title, description, closingTime } = req.body;
     let errors = [];
@@ -42,12 +58,15 @@ exports.postAddTender = (req, res) => {
                     closingTime
                 });
             } else {
+
                 const newTender = new Tender({
-                    //destructuring
-                    tenderNumber,
-                    title,
-                    description,
-                    closingTime
+                    tenderNumber: req.body.tenderNumber,
+                    title: req.body.title.toUpperCase(),
+                    description: req.body.description,
+                    closingTime: req.body.closingTime,
+                    managerId: managerId,
+                    manager: name,
+
                 });
 
                 newTender
@@ -65,14 +84,27 @@ exports.postAddTender = (req, res) => {
     }
 }
 exports.getTenders = async (req, res) => {
-    const tenders = await Tender.find();
+    const tenders = await Tender.find({ managerId: req.user._id });
+    const allBids = await Bid.find();
+    const approvedBids = await Bid.find({ status: "PASS" })
+    const denieddBids = await Bid.find({ status: "FAIL" })
+    const pendingdBids = await Bid.find({ status: "PENDING" })
     const tendersLength = tenders.length;
+    const bidsLength = allBids.length;
+    const approvedBidsLength = approvedBids.length
+    const deniedBidsLength = denieddBids.length
+    const pendingdBidsLength = pendingdBids.length
     Tender.find({}).then(tenders => {
         res.render("tenders", {
             name: req.user.username,
             tenders: tenders,
             tendersLength: tenders.length,
             tendersNumber: tendersLength,
+            bidsNumber: bidsLength,
+            approvedBidsNumber: approvedBidsLength,
+            deniedBidsNumber: deniedBidsLength,
+            pendingdBidsNumber: pendingdBidsLength
+
         })
 
     }).catch(err => {
@@ -80,8 +112,16 @@ exports.getTenders = async (req, res) => {
     });
 }
 exports.getEditTender = async (req, res, next) => {
-    const allTenders = await Tender.find();
+    const allTenders = await Tender.find({ managerId: req.user._id });
+    const allBids = await Bid.find();
+    const approvedBids = await Bid.find({ status: "PASS" })
+    const denieddBids = await Bid.find({ status: "FAIL" })
+    const pendingdBids = await Bid.find({ status: "PENDING" })
     const tendersLength = allTenders.length;
+    const bidsLength = allBids.length;
+    const approvedBidsLength = approvedBids.length
+    const deniedBidsLength = denieddBids.length
+    const pendingdBidsLength = pendingdBids.length
     const editMode = req.query.edit;
     if (!editMode) {
         return res.redirect("/");
@@ -102,6 +142,10 @@ exports.getEditTender = async (req, res, next) => {
                 validationErrors: [],
                 name: req.user.username,
                 tendersNumber: tendersLength,
+                bidsNumber: bidsLength,
+                approvedBidsNumber: approvedBidsLength,
+                deniedBidsNumber: deniedBidsLength,
+                pendingdBidsNumber: pendingdBidsLength
             });
         })
         .catch(err => {

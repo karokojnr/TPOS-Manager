@@ -16,7 +16,7 @@ const ManagerSchema = new mongoose.Schema({
     },
     isManager: {
         type: String,
-        default: "YES",
+        default: "NO",
     },
     date: {
         type: Date,

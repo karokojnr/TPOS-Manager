@@ -123,13 +123,13 @@
 
         // The data for our dataset
         data: {
-            labels: ['Tenders'],
+            labels: ['All Bids',"Approved Bids", "Denied Bids", "Pending Bids"],
             // Information about the dataset
             datasets: [{
                 label: 'UACAS DATA',
-                data: [<%= tendersNumber %>],
+                data: [<%= bidsNumber %>,<%= approvedBidsNumber %>, <%= deniedBidsNumber %>, <%= pendingdBidsNumber %>],
                 backgroundColor: 'rgba(42,65,232,0.08)',
-                borderColor: '#2a41e8',
+                borderColor: '#008080',
                 borderWidth: "3",
                 pointRadius: 5,
                 pointHoverRadius: 5,
